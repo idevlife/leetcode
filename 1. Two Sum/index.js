@@ -4,30 +4,18 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let args = {};
-    for(let i=0; i<nums.length; i++){
-        if(args[nums[i]]==null){
-            args[nums[i]]=[];
-        }
-        args[nums[i]].push(i);
-    }
-    let keys = Object.keys(args);
-    let result = new Set();
-    for(let i=0; i<keys.length; i++){
-        let a = keys[i];
-        let b = target-a+'';
-        if(keys.indexOf(b)>-1){
-            for(let f=0;f<args[a].length; f++){
-                for(let s=0;s<args[b].length; s++){
-                    if(args[a][f]!=args[b][s]){
-                        result.add(args[a][f]);
-                        result.add(args[b][s]);
-                    }
-                }
-            }
+    let result = [];
+    let min = Math.min(...nums);
+    let max = Math.max(...nums);
+    for(let i=min;i<=max;i++){
+        let j = target-i;
+        let indexI = nums.indexOf(i);
+        let indexJ = nums.indexOf(j,indexI+1);
+        if(indexI>-1 && indexJ>-1 && indexI!=indexJ){
+            result = result.concat([indexI,indexJ]);
         }
     }
-    return [...result];
+    return result;
 };
 
-console.log(twoSum([3,2,4],6));
+console.log(getIndexList([0,4,3,0],0));
