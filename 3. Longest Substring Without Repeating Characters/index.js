@@ -3,23 +3,22 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    if(s=='') return 0;
     let strList = s.split("");
-    let maxList = [];
-    maxList[0] = [strList[0]];
-    let maxNumList = [];
-    maxNumList[0] = 1;
-    for(let i=1;i<strList.length;i++){
-        let c = strList[i];
-        let lastMaxList = maxList[i-1];
-        if(lastMaxList.indexOf(c)==-1){
-            maxList[i] = lastMaxList.concat([c]);
-            maxNumList[i] = maxNumList[i-1]+1;
-        } else {
-            let index = lastMaxList.indexOf(c);
-            maxList[i] = lastMaxList.slice(index+1).concat([c]);
-            maxNumList[i] = lastMaxList.length-index;
+    let maxNumList = [0];
+    let preList = [];
+    for(let i=0;i<strList.length;i++){
+        maxNumList[i]=1;
+        let c = s[i];
+        let subList = [];
+        for(let j=i;j>=preList.lastIndexOf(c);j--){
+            if(subList.indexOf(strList[j])==-1){
+                subList.push(strList[j]);
+            } else {
+                break;
+            }
         }
+        preList.push(c);
+        maxNumList[i]=subList.length;
     }
     return Math.max(...maxNumList);
 };
