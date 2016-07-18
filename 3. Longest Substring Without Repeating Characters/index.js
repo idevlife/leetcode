@@ -16,7 +16,6 @@ var lengthOfLongestSubstring = function(s) {
             subList = subList.slice(1).concat([c]);
         } else {
             subList = [];
-            console.log(i,preList.lastIndexOf(c));
             for(let j=i;j>=preList.lastIndexOf(c);j--){
                 if(subList.indexOf(strList[j])==-1){
                     subList.push(strList[j]);
