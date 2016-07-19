@@ -4,7 +4,6 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let result = [];
     let idxMap = {};
     for(let i=0;i<nums.length;i++){
         let n = idxMap[nums[i]];
@@ -13,11 +12,10 @@ var twoSum = function(nums, target) {
         }
         n = idxMap[target-nums[i]];
         if(n!=null && n<i){
-            result = [n,i];
-            break;
+            return [n,i];
         }
     }
-    return result;
+    return [];
 };
 
 console.log(getIndexList([0,4,3,0],0));
