@@ -5,13 +5,13 @@
  */
 var twoSum = function(nums, target) {
     let result = [];
-    let idxMap = new Map();
+    let idxMap = {};
     for(let i=0;i<nums.length;i++){
-        let n = idxMap.get(nums[i]);
+        let n = idxMap[nums[i]];
         if(n==null){
-            idxMap.set(nums[i],i);
+            idxMap[nums[i]]=i;
         }
-        n = idxMap.get(target-nums[i]);
+        n = idxMap[target-nums[i]];
         if(n!=null && n<i){
             result = [n,i];
             break;
