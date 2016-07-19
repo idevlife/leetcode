@@ -5,14 +5,16 @@
  */
 var twoSum = function(nums, target) {
     let result = [];
-    let min = Math.min(...nums);
-    let max = Math.max(...nums);
-    for(let i=min;i<=max;i++){
-        let j = target-i;
-        let indexI = nums.indexOf(i);
-        let indexJ = nums.indexOf(j,indexI+1);
-        if(indexI>-1 && indexJ>-1 && indexI!=indexJ){
-            result = result.concat([indexI,indexJ]);
+    let idxMap = new Map();
+    for(let i=0;i<nums.length;i++){
+        let n = idxMap.get(nums[i]);
+        if(n==null){
+            idxMap.set(nums[i],i);
+        }
+        n = idxMap.get(target-nums[i]);
+        if(n!=null && n<i){
+            result = [n,i];
+            break;
         }
     }
     return result;
